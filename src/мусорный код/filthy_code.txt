@@ -1,0 +1,219 @@
+interface test{
+  length: number,
+  title: string,
+}
+
+function MmyName_(obj: test): number{
+  obj.title += '!!!!hello!';
+  return obj.title.length;
+}
+
+function Mylogs_(callback: Function, obj: test): void{
+  let res = callback(obj);
+  console.log(res );
+}
+let Myobj_: test = {
+  length: 0,
+  title: 'Serg',
+}
+
+Mylogs_(MmyName_, Myobj_);
+
+console.log('hello');
+
+/*
+type Filter = {
+  <T>(array: T[], f: (item: T) => boolean): T
+}
+*/
+/*
+type Filter = {
+  (array:unknown, callback:unknown) => unknown[];
+}
+*/
+/*
+type Filter_ = {
+  (array: number[], f: (item: number) =>  boolean): number[]
+}
+*/
+
+/*
+type Filter_ = {
+  (array: number[], f: (item: number) =>  boolean): number[],
+  (array: string[], f: (item: string) => boolean): string[],
+  (array: object[], f: (item: object) => boolean): object[],
+}
+*/
+
+//создаем тип сигнатуры функции
+type Filter_ = {
+  <T>(array: T[], f: (item:T) => boolean): T[]
+}
+
+
+let names_ =[
+  {firstName: 'Anna'},
+  {firstName: 'Alena'},
+  {firstName: 'Sacha'}
+]
+
+//создал функцию типа Filter_
+const filter__ : Filter_= (array, f) => {
+  let result = [];
+  for(let i = 0; i < array.length; i++){
+    let item = array[i];
+    if(f(item)){
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+let res_ = filter__([15,45,87,554,1,654,651,5,7,89,6], x => x>100);
+console.log(res_);
+
+function filterMod_<T, U> (array: T[], f:(item: T) => U): U[] {
+  let result:any =  [];
+  for(let i=0; i<array.length; i++){
+    if(array[i]){
+      result[i] = f(array[i]);
+    }
+  }
+  return result;
+
+}
+
+let res2_ = filterMod_([1,2,3,48,987,63541,165,54,], x => {return x*2}
+)
+console.log(res2_);
+
+let res3_ = filterMod_(['s','t','r','i','n','g'], x => { return x == 's' });
+console.log(res3_);
+
+let promise_ = new Promise<number>(resolve => resolve(45))
+
+promise_.then(result => {return result*2}).then(res => console.log(res));
+
+
+
+function click_(event: HTMLButtonElement | null){
+  console.log(event);
+  if(event)
+  event.addEventListener('click', () => console.log('click me!', '\n'))
+  console.log(event);
+
+}
+click_(document.querySelector('#testbtn'));
+
+function test__<T>(array:T[]){
+  return array.map( (x:T) => x+'H');
+}
+
+let res4_= test__([1,2,3,56,4,8]);
+console.log(res4_);
+
+//определил структуру HTML элемента
+// type MyEvent_<T> = {
+//   target:T
+//   type:string
+// }
+
+// type ButtonEvent_ = MyEvent_<HTMLButtonElement>
+/*
+function myButton__<T> (item:string) {
+  let elem = document.querySelector(item);
+  elem?.addEventListener('click', (event) => console.log(event)
+  );
+}
+
+myButton__('#testbtn')
+*/
+
+// function triggerEvent<T>(event:MyEvent_<T>):void{
+//   console.log(event.target, '!!!');
+// }
+
+// triggerEvent({target:document.querySelector("#testbtn"),
+//  type:"click"})
+
+type treeNode = {
+  value: string
+}
+
+type leafNode = treeNode & {
+  isLeaf: true
+}
+
+type innerNode = treeNode & {
+  children: [treeNode] | [treeNode, treeNode, treeNode]
+}
+
+ let a: treeNode = {value: 'a'};
+ let b: leafNode = {value: 'b', isLeaf:true}
+ let c: innerNode = {value: 'c', children:[b,a, b]}
+
+ const mapNode = <T extends treeNode> (
+    node : T,
+    f:(value:string) => string
+ ):T => {
+  return {
+    ...node,
+    value: f(node.value)
+  }
+ }
+
+ let a1 = mapNode(a, (x:string) => x.toUpperCase())
+ let b1 = mapNode(b, (x:string) => x.toUpperCase())
+ let c1 = mapNode(c, (x:string) => x.toUpperCase())
+
+ console.log('a = ',a1, "\n");
+ console.log('b = ',b1, "\n");
+ console.log('c = ',c1, "\n");
+
+type Cat = {name:string, color: string, weight: number, voice: string};
+type Dog = {name:string, color: string, weight: number, voice: string, run:boolean};
+
+type Mutant = Cat & Dog;
+
+let aaa: Mutant = {
+  name: 'Barsik',
+  color: "black",
+  weight: 20,
+  voice: 'Myau',
+  run: true
+}
+const funcCall = () => {
+  console.log('aim worker!');
+}
+function funcCallMod(){
+  console.log('aim worker!!!');
+}
+
+funcCall.call(aaa);
+funcCallMod.call(aaa);
+
+const fill = (length:number, value:string):string[] => {
+  return Array.from({length}, () => value);
+}
+
+let mas = fill(10, 'a');
+console.log(mas);
+
+function callMY<T extends unknown[], R>(
+  f:(...args:T) => R,
+  ...args:T
+):R
+{
+  return f(...args);
+}
+
+let res = callMY((x) => {
+  let ret:unknown[] = [];
+  if(x instanceof Array){
+    for(let i=0; i<x.length; i++){
+      ret.push(x[i]);
+    }
+  }
+  return ret;
+}, [1,15,48,1548,54,5]);
+console.log(res);
