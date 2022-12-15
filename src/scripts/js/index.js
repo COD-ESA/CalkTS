@@ -4,6 +4,9 @@ const input = document.querySelector('input');
 const calculation = (akkum, operation) => {
     var _a;
     if (akkum.length === 1) {
+        if (operation[0] === 'SQ' && akkum[0] > 0) {
+            return Math.sqrt(akkum[0]);
+        }
         return (_a = akkum[0]) !== null && _a !== void 0 ? _a : 0;
     }
     switch (operation.shift()) {
@@ -22,7 +25,19 @@ const calculation = (akkum, operation) => {
         }
     }
 };
-//тут будет функция вычисляющая тригонометричесские выражения
+const chooseMathSymbol = (inputStr) => {
+    const tempArray = inputStr.split('');
+    if (tempArray !== undefined) {
+        if (tempArray[0] === '-') {
+            tempArray.shift();
+            return tempArray.join('');
+        }
+        tempArray.unshift('-');
+        return tempArray.join('');
+    }
+    return inputStr;
+};
+// тут будет функция вычисляющая тригонометричесские выражения
 function calc() {
     const akkumulator = [];
     const operation = []; // знак операции
@@ -35,7 +50,8 @@ function calc() {
                     case '-':
                     case '*':
                     case '/':
-                    case '%': {
+                    case '%':
+                    case 'SQ': {
                         answer = true;
                         akkumulator.push(Number(input.value));
                         operation.push(strSymbol);
@@ -57,6 +73,10 @@ function calc() {
                         input.value = '0';
                         akkumulator.length = 0;
                         answer = false;
+                        break;
+                    }
+                    case '+/-': {
+                        input.value = chooseMathSymbol(input.value);
                         break;
                     }
                     default:
