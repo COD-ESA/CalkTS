@@ -1,8 +1,8 @@
 const kb: HTMLElement | null = document.querySelector('.kb');
 const input:HTMLElement | null = document.querySelector('input');
 
-type CalculationType = (akkum: number[], operation:string[]) => number;
-const calculation:CalculationType = (akkum, operation) => {
+type CalculationType <T>= (akkum: T[], operation:string[]) => T;
+const calculation:CalculationType<number> = (akkum, operation) => {
   if (akkum.length === 1) {
     if (operation[0] === 'SQ' && akkum[0] > 0) {
       return Math.sqrt(akkum[0]);
