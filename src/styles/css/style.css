@@ -1,5 +1,8 @@
 body {
-  background: blue;
+  background: rgb(2, 0, 36);
+  background: -webkit-gradient(linear, left top, right top, from(rgb(2, 0, 36)), color-stop(44%, rgb(81, 39, 115)), to(rgb(78, 162, 179)));
+  background: -o-linear-gradient(left, rgb(2, 0, 36) 0%, rgb(81, 39, 115) 44%, rgb(78, 162, 179) 100%);
+  background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(81, 39, 115) 44%, rgb(78, 162, 179) 100%);
   margin-right: auto;
   width: 100vw;
   height: 100vh;
@@ -19,7 +22,7 @@ body {
   background-color: #8EC5FC;
   background-image: -o-linear-gradient(28deg, #8EC5FC 0%, #E0C3FC 100%);
   background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-  margin: auto;
+  margin: 15% auto;
   position: relative;
   padding: 10px;
   width: 380px;
