@@ -5,6 +5,7 @@ type CalculationType <T>= (akkum: T[], operation:string[]) => T;
 const calculation:CalculationType<number> = (akkum, operation) => {
   if (akkum.length === 1) {
     if (operation[0] === 'SQ' && akkum[0] > 0) {
+      console.log('akkum = ', akkum);
       return Math.sqrt(akkum[0]);
     }
     return akkum[0] ?? 0;
@@ -31,6 +32,7 @@ const calculation:CalculationType<number> = (akkum, operation) => {
   }
 };
 
+// реализует обработку знака числа после нажатия кнопки "+/-"
 const chooseMathSymbol = (inputStr:string):string => {
   const tempArray = inputStr.split('');
   if (tempArray !== undefined) {
@@ -59,16 +61,17 @@ function calc() {
           case '/':
           case '%':
           case 'SQ':
-          case 'EXP':{
+          case 'EXP': {
             answer = true;
             akkumulator.push(Number(input.value));
             operation.push(strSymbol);
             akkumulator[0] = calculation(akkumulator, operation);
             akkumulator.length = 1;
+            console.log('akkum = ', akkumulator);
+
             input.value = String(akkumulator);
             break;
           }
-
           case '=': {
             akkumulator.push(Number(input.value));
             akkumulator[0] = calculation(akkumulator, operation);
@@ -90,6 +93,13 @@ function calc() {
           }
           case 'π': {
             input.value = '3.14159';
+            break;
+          }
+          case 'tan':
+          case 'sin':
+          case 'cos': {
+            input.value = 'Not implementation';
+            answer = true;
             break;
           }
 
