@@ -20,6 +20,8 @@ const calculation = (akkum, operation) => {
             return akkum[0] / akkum[1];
         case '%':
             return akkum[0] * akkum[1] * 0.01;
+        case 'EXP':
+            return akkum[0] * (Math.pow(10, akkum[1]));
         default: {
             return 0;
         }
@@ -51,7 +53,8 @@ function calc() {
                     case '*':
                     case '/':
                     case '%':
-                    case 'SQ': {
+                    case 'SQ':
+                    case 'EXP': {
                         answer = true;
                         akkumulator.push(Number(input.value));
                         operation.push(strSymbol);
@@ -77,6 +80,10 @@ function calc() {
                     }
                     case '+/-': {
                         input.value = chooseMathSymbol(input.value);
+                        break;
+                    }
+                    case 'π': {
+                        input.value = '3.14159';
                         break;
                     }
                     default:
