@@ -5,7 +5,6 @@ const calculation = (akkum, operation) => {
     var _a;
     if (akkum.length === 1) {
         if (operation[0] === 'SQ' && akkum[0] > 0) {
-            console.log('akkum = ', akkum);
             return Math.sqrt(akkum[0]);
         }
         return (_a = akkum[0]) !== null && _a !== void 0 ? _a : 0;
@@ -62,7 +61,6 @@ function calc() {
                         operation.push(strSymbol);
                         akkumulator[0] = calculation(akkumulator, operation);
                         akkumulator.length = 1;
-                        console.log('akkum = ', akkumulator);
                         input.value = String(akkumulator);
                         break;
                     }
