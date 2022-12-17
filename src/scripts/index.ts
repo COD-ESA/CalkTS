@@ -5,7 +5,6 @@ type CalculationType <T>= (akkum: T[], operation:string[]) => T;
 const calculation:CalculationType<number> = (akkum, operation) => {
   if (akkum.length === 1) {
     if (operation[0] === 'SQ' && akkum[0] > 0) {
-      console.log('akkum = ', akkum);
       return Math.sqrt(akkum[0]);
     }
     return akkum[0] ?? 0;
@@ -67,8 +66,6 @@ function calc() {
             operation.push(strSymbol);
             akkumulator[0] = calculation(akkumulator, operation);
             akkumulator.length = 1;
-            console.log('akkum = ', akkumulator);
-
             input.value = String(akkumulator);
             break;
           }
